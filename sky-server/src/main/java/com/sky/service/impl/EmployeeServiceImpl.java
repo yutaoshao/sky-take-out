@@ -92,10 +92,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
 
+        // 使用 PageHelper 插件开启分页功能，根据传入的页码和每页记录数进行分页
+        // employeePageQueryDTO.getPage() 获取当前请求的页码
+        // employeePageQueryDTO.getPageSize() 获取当前请求每页显示的记录数
         PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
+        // 调用 employeeMapper 的 pageQuery 方法执行分页查询，返回一个 Page 对象
+        // Page 对象包含了分页查询的结果信息，如总记录数、当前页数据等
         Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
+        // 从 Page 对象中获取查询结果的总记录数
         long total = page.getTotal();
+        // 从 Page 对象中获取当前页的员工数据列表
         List<Employee> result = page.getResult();
+        // 创建一个 PageResult 对象，将总记录数和当前页数据列表封装到该对象中并返回
+        // PageResult 用于统一封装分页查询结果，方便前端处理
         return new PageResult(total, result);
     }
 
