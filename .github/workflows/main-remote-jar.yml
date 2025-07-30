@@ -69,3 +69,4 @@ jobs:
           WEIXIN_TEMPLATE_ID: ${{ secrets.WEIXIN_TEMPLATE_ID }}
           QWEN_APIHOST: ${{ secrets.QWEN_APIHOST }}
           QWEN_APIKEY: ${{ secrets.QWEN_APIKEY }}
+
