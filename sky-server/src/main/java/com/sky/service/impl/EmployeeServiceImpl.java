@@ -78,14 +78,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setStatus(StatusConstant.ENABLE);
         // 将默认密码进行 MD5 加密后，设置为员工的密码
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
-        // 设置员工记录的创建时间为当前时间
-        employee.setCreateTime(LocalDateTime.now());
-        // 设置员工记录的更新时间为当前时间
-        employee.setUpdateTime(LocalDateTime.now());
-        // 临时设置员工记录的创建用户 ID 为 10L，后续需要修改为当前登录用户的 ID
-        employee.setCreateUser(BaseContext.getCurrentId());
-        // 临时设置员工记录的更新用户 ID 为 10L，后续需要修改为当前登录用户的 ID
-        employee.setUpdateUser(BaseContext.getCurrentId());
+
+//        // 设置员工记录的创建时间为当前时间
+//        employee.setCreateTime(LocalDateTime.now());
+//        // 设置员工记录的更新时间为当前时间
+//        employee.setUpdateTime(LocalDateTime.now());
+//        // 临时设置员工记录的创建用户 ID 为 10L，后续需要修改为当前登录用户的 ID
+//        employee.setCreateUser(BaseContext.getCurrentId());
+//        // 临时设置员工记录的更新用户 ID 为 10L，后续需要修改为当前登录用户的 ID
+//        employee.setUpdateUser(BaseContext.getCurrentId());
+
         employeeMapper.insert(employee);
     }
 
@@ -129,8 +131,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void update(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO, employee);
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+//        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.update(employee);
     }
 }
