@@ -56,17 +56,11 @@ public class DishServiceImpl implements DishService {
     public void saveWithFlavor(DishDTO dishDTO) {
 
         Dish dish = new Dish();
-
         BeanUtils.copyProperties(dishDTO, dish);
-
-
         // 向菜品表插入 1 条数据
         dishMapper.insert(dish);
-
         // 获取刚插入的菜品的id
         Long dishId = dish.getId();
-
-
         List<DishFlavor> flavors = dishDTO.getFlavors();
         if (flavors != null && !flavors.isEmpty()) {
             flavors.forEach(dishFlavor -> {
@@ -172,5 +166,16 @@ public class DishServiceImpl implements DishService {
                 }
             }
         }
+    }
+
+    @Override
+    public List<Dish> list(Long categoryId) {
+        Dish dish = Dish.builder()
+                .categoryId(categoryId)
+                .status(StatusConstant.ENABLE)
+                .build();
+
+
+        return dishMapper.list(dish);
     }
 }
